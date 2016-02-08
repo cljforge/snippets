@@ -1,0 +1,103 @@
+<html>
+  <head>
+    <title>Custom Scroll</title>
+    <style>
+    	html , body {
+    		height: 99%;
+			background: rgba(0,0,0,.3);
+			padding: 0;
+			margin: 0;
+    	}
+
+    	.h {
+    		height: 100%;
+    	}
+
+    	.container { 
+    		display: inline-block;
+    		overflow: hidden;
+    		width: 650px;
+    		height: 100%;
+    		border: 1px solid black;
+    		position: relative;
+			background: none;
+
+    	}
+
+		.column {
+			height: 100%;
+			width: 50px;
+			background: url('textures/marble-body%20.png');
+			background-size: contain;
+			display: inline-block;
+		}
+
+    	.scroll-bar {
+    		display: inline-block;
+    		height: 100%;
+    		margin-right: 10px;
+    		width: 20px;
+    		background-image: url('rope.png');
+    		background-size: contain;
+    		background-position: 0 0;
+    	}
+
+    	.scroll-caret{
+    		top: 0;
+    		position: relative;
+    		display: block;
+    		width: 30px;
+    		margin-left: -5px;
+    		height: 20px;
+    		background-image: url('rock.png');
+    		background-repeat: no-repeat;
+    		background-size: contain;
+    		background-position: 0 0;
+    	}
+    </style>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="scroll.js"></script>
+  </head>
+  <body>
+  	<div class="h" align="center">
+		<div class="column"></div>
+  		<div class="container" align="left">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac tamen, ne cui loco non videatur esse responsum,
+			pauca etiam nunc dicam ad reliquam orationem tuam. Quod non faceret, si in voluptate summum bonum poneret.
+			Intellegi quidem, ut propter aliam quampiam rem, verbi gratia propter voluptatem, nos amemus; Tum ego: Non
+			mehercule, inquam, soleo temere contra Stoicos, non quo illis admodum assentiar, sed pudore impedior; Lorem
+			ipsum dolor sit amet, consectetur adipiscing elit. Ac tamen, ne cui loco non videatur esse responsum, pauca
+			etiam nunc dicam ad reliquam orationem tuam. Quod non faceret, si in voluptate summum bonum poneret. Intellegi
+			quidem, ut propter aliam quampiam rem, verbi gratia propter voluptatem, nos amemus; Tum ego: Non mehercule,
+			inquam, soleo temere contra Stoicos, non quo illis admodum assentiar, sed pudore impedior; Lorem ipsum dolor
+			sit amet, consectetur adipiscing elit. Ac tamen, ne cui loco non videatur esse responsum, pauca etiam nunc
+			dicam ad reliquam orationem tuam. Quod non faceret, si in voluptate summum bonum poneret. Intellegi quidem,
+			ut propter aliam quampiam rem, verbi gratia propter voluptatem, nos amemus; Tum ego: Non mehercule, inquam,
+			soleo temere contra Stoicos, non quo illis admodum assentiar, sed pudore impedior; Lorem ipsum dolor sit amet,
+			consectetur adipiscing elit. Ac tamen, ne cui loco non videatur esse responsum, pauca etiam nunc dicam ad
+			reliquam orationem tuam. Quod non faceret, si in voluptate summum bonum poneret. Intellegi quidem, ut propter
+			aliam quampiam rem, verbi gratia propter voluptatem, nos amemus; Tum ego: Non mehercule, inquam, soleo temere
+			contra Stoicos, non quo illis admodum assentiar, sed pudore impedior; Lorem ipsum dolor sit amet, consectetur
+			adipiscing elit. Ac tamen, ne cui loco non videatur esse responsum, pauca etiam nunc dicam ad reliquam
+			orationem tuam. Quod non faceret, si in voluptate summum bonum poneret. Intellegi quidem, ut propter aliam
+			quampiam rem, verbi gratia propter voluptatem, nos amemus; Tum ego: Non mehercule, inquam, soleo temere
+			contra Stoicos, non quo illis admodum assentiar, sed pudore impedior; Lorem ipsum dolor sit amet, consectetur
+			adipiscing elit. Ac tamen, ne cui loco non videatur esse responsum, pauca etiam nunc dicam ad reliquam
+			orationem tuam. Quod non faceret, si in voluptate summum bonum poneret. Intellegi quidem, ut propter aliam
+			quampiam rem, verbi gratia propter voluptatem, nos amemus; Tum ego: Non mehercule, inquam, soleo temere contra
+			Stoicos, non quo illis admodum assentiar, sed pudore impedior; Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+			Ac tamen, ne cui loco non videatur esse responsum, pauca etiam nunc dicam ad reliquam orationem tuam.
+			Quod non faceret, si in voluptate summum bonum poneret. Intellegi quidem, ut propter aliam quampiam rem,
+			verbi gratia propter voluptatem, nos amemus; Tum ego: Non mehercule, inquam, soleo temere contra Stoicos,
+			non quo illis admodum assentiar, sed pudore impedior; Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+			Ac tamen, ne cui loco non videatur esse responsum, pauca etiam nunc dicam ad reliquam orationem tuam. Quod non
+			faceret, si in voluptate summum bonum poneret. Intellegi quidem, ut propter aliam quampiam rem, verbi gratia
+  		</div>
+		<div class="column"></div>
+  		<div class="scroll-bar" align="center">
+  			<div class="scroll-caret"></div>
+  		</div>
+  	</div>  	
+  </body>
+</html>

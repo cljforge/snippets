@@ -1,0 +1,175 @@
+	html , body {
+       height: 100%;
+       margin: 0;
+       padding: 0;
+       overflow: hidden;
+   }
+
+   div {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.screen {
+    border: 1px solid black;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.anchor {
+    position: absolute;
+    top:0;
+    left:0;
+}
+
+.wrapper {
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+    height: 99.5%;
+}
+
+.container { 
+  display: inline-block;
+  overflow: hidden;
+  width: 500px;
+  height: 100%;
+  border: 1px solid black;
+  position: relative;
+
+}
+
+.scroll {
+    display: inline-block;
+    height: 100%;
+    margin-right: 10px;
+}
+
+.scroll-bar {
+    position: relative;
+    float: left;
+    display: block;
+    height: 100%;
+    width: 20px;
+    background-image: url('img/scroll/rope.png');
+    background-size: contain;
+    background-position: 0 0;
+}
+
+.rope-part {
+    float: left;
+    display: block;
+    height: 30px;
+    width: 20px;
+    background-image: url('img/scroll/rope.png');
+    background-repeat: no-repeat-x;
+    background-size: contain;
+    background-position: 0 0;
+}
+
+.wheel {
+    cursor: pointer;
+    background-size: contain;
+    position: relative;
+    width: 53px;
+    height: 60px;
+    transform: rotate(0deg);
+}
+
+.wheel-spinner {
+    background: url('img/scroll/bot-2.png') no-repeat 0 0;
+    background-size: contain;
+    height: 43px;
+    width: 43px;
+    position: relative;
+}
+
+.wheel-button {
+    position: absolute;
+    width: 20px;
+    height: 13px;
+}
+
+#wheel-top {
+    background: url('img/scroll/top-3.png') no-repeat 0 0;
+    background-size: contain;
+    top: 0;
+}
+
+#wheel-bot{
+    background: url('img/scroll/bot-3.png') no-repeat 0 0;
+    background-size: contain;
+    bottom: 0;
+}
+
+#wheel-top .wheel-spinner {
+    top: 12px;
+}
+
+#wheel-bot .wheel-spinner {
+    top: 3px;
+    left: 1px;
+}
+
+#wheel-top .wheel-button {
+    background: url('img/scroll/top-1.png') no-repeat 0 0;
+    background-size: contain;
+    top: 25px;
+    left: 16px;
+}
+
+#wheel-bot .wheel-button {
+    background: url('img/scroll/bot-1.png') no-repeat 0 0;
+    background-size: contain;
+    top: 19px;
+    left: 16px;
+}
+
+.scroll-caret{
+    top: 0;
+    position: relative;
+    display: block;
+    width: 30px;
+    margin-left: -5px;
+}
+
+.scroll-caret:before{
+    display: block;
+    content: "";
+    height: 20px;
+    width: 30px;
+    position: absolute;
+    top: 0;
+    background-image: url('img/scroll/rock.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 0 0;
+}
+
+.scroll-caret:after{
+    display: block;
+    content: "";
+    height: 20px;
+    margin-top: -20px;
+    width: 30px;
+    position: absolute;
+    top: 100%;
+    background-image: url('img/scroll/rock.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 0 0;
+}
+
+.arrow {
+    display: block;
+    content: "";
+    height: 20px;
+    width: 30px;
+    position: absolute;
+    top: 100%;
+    background-image: url('img/scroll/rock.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 0 0;
+}

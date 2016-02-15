@@ -1,14 +1,14 @@
-	html , body {
-       height: 100%;
-       margin: 0;
-       padding: 0;
-       overflow: hidden;
-   }
+html , body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
 
-   body{
-    background: url('img/landscapetest.jpg') repeat-x;
-    background-color: #AEDF2C;
-    background-position: 0 0;
+body{
+    background: url('img/landscapetest.jpg') repeat-x, linear-gradient(to bottom, #BBEDF8 0%, #BBEDF8 50%,#AEDF2C 50%,#AEDF2C 100%);
+    background-size: 40%;
+    background-position: 0 50%;
     background-attachment: fixed;
 }
 
@@ -19,9 +19,9 @@ div {
 }
 
 .screen {
+    margin: 50 100 100 100;
     background-color: #fff;
-    border: 1px solid black;
-    height: 100%;
+    height: calc(100% - 100px);
     box-sizing: border-box;
 }
 
@@ -42,16 +42,19 @@ div[class*=anchor-] {
     overflow: visible;
     margin: 0;
     padding: 0;
-    height: 99.5%;
+    height: 100%;
 }
 
-.container { 
-  display: inline-block;
-  overflow: hidden;
-  width: 500px;
-  height: 100%;
-  border: 1px solid black;
-  position: relative;
+.container {
+    background-image: url('img/textures/marble-top.png'),url('img/textures/marble-top.png'), url('img/textures/marble-body.png'), url('img/textures/marble-body.png');
+    background-repeat: no-repeat,no-repeat, repeat-y,repeat-y;
+    background-size: 50px,50px, 50px, 50px;
+    background-position: left top,right top, left top, right top;
+    display: inline-block;
+    overflow: hidden;
+    width: 700px;
+    height: 100%;
+    position: relative;
 
 }
 
@@ -78,9 +81,9 @@ div[class*=anchor-] {
     height: 30px;
     width: 20px;
     background-image: url('img/scroll/rope.png');
-    background-repeat: no-repeat-x;
-    background-size: contain;
-    background-position: 0 0;
+    background-repeat: repeat-y;
+    background-size: cover;
+    background-position: 0 0px;
 }
 
 .wheel {

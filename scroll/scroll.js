@@ -19,11 +19,21 @@ screens =
 {
 	anchor: "forth",
 	content: "<u>forth</u>"
+},
+{
+	anchor: "fifth",
+	content: "<u>forth</u>"
+},
+{
+	anchor: "sixth",
+	content: "<u>forth</u>"
+},
+{
+	anchor: "seven",
+	content: "<u>forth</u>"
 }];
 
 function scrollToAnchor(el){
-
-	//TODO calculate diff in indecies to fix background offset top
 
 	if(!inAction){
 		inAction = true;
@@ -38,7 +48,7 @@ function scrollToAnchor(el){
 		}, time*1000);
 
 		if(delta < -1 || delta > 1){
-			delta > 0? backOffset +=4:backOffset -=4;
+			backOffset +=delta/100;
 		}
 
 	//Landscape
@@ -102,11 +112,6 @@ function scale (){
 	carH = $('.scroll-caret')[0].clientHeight,
 	bH = $('.scroll-bar')[0].clientHeight;
 
-	for (var i = 0; i < screens.length; i++) {
-		$C.append('<div id="'+ screens[i].anchor +'" class="screen">' + screens[i].content + "</div>");
-		$sB.append('<div class="anchor-'+ screens[i].anchor +'" onclick="scrollToAnchor(\''+ screens[i].anchor +'\')">' + screens[i].anchor + "</div>")
-	};
-
 	sBlockHeight = (bH / screens.length);
 
 	$('.scroll-caret').css('height', sBlockHeight); 
@@ -124,6 +129,17 @@ function scale (){
 
 $(document).ready(function(){
 	$(window).on('resize', _.debounce(scale,200))
+
+	var $C = $('.container'),
+	$sB = $('.scroll-bar'),
+	carH = $('.scroll-caret')[0].clientHeight,
+	bH = $('.scroll-bar')[0].clientHeight;
+
+	for (var i = 0; i < screens.length; i++) {
+		$C.append('<div id="'+ screens[i].anchor +'" class="screen">' + screens[i].content + "</div>");
+		$sB.append('<div class="anchor-'+ screens[i].anchor +'" onclick="scrollToAnchor(\''+ screens[i].anchor +'\')">' + screens[i].anchor + "</div>")
+	};
+
 	scale();
 
 	var $body = $('body');

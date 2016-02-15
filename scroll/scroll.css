@@ -5,19 +5,34 @@
        overflow: hidden;
    }
 
-   div {
+   body{
+    background: url('img/landscapetest.jpg') repeat-x;
+    background-color: #AEDF2C;
+    background-position: 0 0;
+    background-attachment: fixed;
+}
+
+div {
     margin: 0;
     padding: 0;
     border: 0;
 }
 
 .screen {
+    background-color: #fff;
     border: 1px solid black;
     height: 100%;
     box-sizing: border-box;
 }
 
-.anchor {
+div[class*=anchor-] {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -khtml-user-select: none;    /* Konqueror */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* IE/Edge */
+    user-select: none;  
+    cursor: pointer;
     position: absolute;
     top:0;
     left:0;
@@ -138,7 +153,8 @@
     display: block;
     content: "";
     height: 20px;
-    width: 30px;
+    width: 23px;
+    margin-left: 4px;
     position: absolute;
     top: 0;
     background-image: url('img/scroll/rock.png');
@@ -152,7 +168,8 @@
     content: "";
     height: 20px;
     margin-top: -20px;
-    width: 30px;
+    width: 23px;
+    margin-left: 4px;
     position: absolute;
     top: 100%;
     background-image: url('img/scroll/rock.png');
@@ -165,10 +182,10 @@
     display: block;
     content: "";
     height: 20px;
-    width: 30px;
+    width: 50px;
     position: absolute;
     top: 100%;
-    background-image: url('img/scroll/rock.png');
+    background-image: url('img/scroll/arrow.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: 0 0;

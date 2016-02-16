@@ -1,148 +1,149 @@
-var wheelAngle = 0,
-backOffset = 50,
-columnOffset = 0,
-currentAnchor,
-inAction = false,
-screens = 
-[{
-	anchor: "first",
-	content: "<b>first</b>"
-},
-{
-	anchor: "second",
-	content: "<strike>second</strike>"
-},
-{
-	anchor: "third",
-	content: "<u>third</u>"
-},
-{
-	anchor: "forth",
-	content: "<u>forth</u>"
-},
-{
-	anchor: "fifth",
-	content: "<u>forth</u>"
-},
-{
-	anchor: "sixth",
-	content: "<u>forth</u>"
-},
-{
-	anchor: "seven",
-	content: "<u>forth</u>"
-}];
+var screens =
+    [
+        {
+            anchor: "Main",
+            content: "<u>main</u>"
+        },
 
-function scrollToAnchor(el){
+        {
+            anchor: "Feedback",
+            content: "<b>Feedback</b>"
+        },
+        {
+            anchor: "About",
+            content: "<strike>About</strike>"
+        }
+    ];
 
-	if(!inAction){
-		inAction = true;
+$(document).ready(function () {
+    var anchorHandler = {
+        wheelAngle: 0,
+        backOffset: 50,
+        columnOffset: 0,
+        sBlockHeight: 0,
+        $C: $('.container'),
+        $SB: $('.scroll-bar'),
+        $SC: $('.scroll-caret'),
+        currentIndex: 0,
+        inAction: false,
+        screens: [],
+        setCurrent: function (index) {
+            this.currentIndex = parseInt(index);
+        },
+        init: function (screens) {
+            var $body = $('body');
 
-		currentAnchor = el;
-		var time = 0.3,
-		caretOffset = $('.anchor-'+el).position().top - sBlockHeight/2 + $('[class*=anchor-]').outerHeight()/2,
-		delta = $('.scroll-caret').position().top - caretOffset;
+            $(window).on('resize', _.debounce(anchorHandler.scale, 200));
 
-		$('.container').animate({
-			scrollTop: $('#'+el).position().top
-		}, time*1000);
+            $body.on('click', '[class*=anchor-]', function () {
+                anchorHandler.scrollToIndex($(this).attr('data-index'));
+            });
 
-		if(delta < -1 || delta > 1){
-			backOffset +=delta/100;
-		}
+            $body.on('click', '#wheel-top', function () {
+                anchorHandler.wheelerScroll(-1)
+            });
+            $body.on('click', '#wheel-bot', function () {
+                anchorHandler.wheelerScroll(1)
+            });
 
-	//Landscape
-	$('body').css({
-		'transition' : 'background-position ' + time + 's linear',
-		'background-position' : '0px ' + backOffset + "%"
-	})
+            this.screens = $.extend(true, {}, screens);
 
+            for (var i = 0; i < screens.length; i++) {
+                this.$C.append('<div id="' + screens[i].anchor + '" class="screen">' + screens[i].content + "</div>", {});
+                this.$SB.append('<div class="anchor-' + i + '" data-index="' + i + '">' + screens[i].anchor + "</div>", {})
+            }
 
-	// Columns 
-	columnOffset += delta;
-	$('.container').css({
-		'transition' : 'background-position ' + time + 's linear',
-		'background-position' : 'left '+ columnOffset +', right '+ columnOffset +', left '+ columnOffset +', right '+ columnOffset
-	})
+            this.scale();
+            return this;
+        },
+        wheelerScroll: function (direction) {
+            var destination = direction + this.currentIndex;
+            if (screens[destination]) {
+                anchorHandler.scrollToIndex(destination);
+            }
+            return this;
+        },
+        scrollToIndex: function (index) {
+            if (!this.inAction) {
+                this.setCurrent(index);
 
-	//ScrollBar
-	$('.scroll-caret').css({
-		'transition' : 'top ' + time + 's linear',
-		'top' : caretOffset
-	});
-	$('.scroll-bar').css({
-		'transition' : 'background-position ' + time + 's linear',
-		'background-position': '0px ' + caretOffset + "px"
-	});
+                this.inAction = true;
+                var time = 0.3,
+                    caretOffset = $('.anchor-' + index).position().top - this.sBlockHeight / 2 + $('[class*=anchor-]').outerHeight() / 2,
+                    delta = this.$SC.position().top - caretOffset;
 
-	//Wheels
-	wheelAngle = wheelAngle + delta/2;
-	$('.rope-part').css({
-		'transition' : 'background-position ' + time + 's linear',
-		'background-position': '0px ' + (caretOffset+6) + "px"
-	});
+                this.$C.animate({
+                    scrollTop: $('#' + this.screens[index].anchor).position().top
+                }, time * 1000);
 
-	$('.wheel-spinner').css({
-		'transition' : 'transform ' + time + "s linear",
-		'transform' : 'rotate(' + wheelAngle +  'deg)'
-	})
+                if (delta < -1 || delta > 1) {
+                    this.backOffset += delta / 100;
+                }
 
-	setTimeout(function(){
-		inAction = false;
-	}, time*1000);
-}
-}
+                //Landscape
+                $('body').css({
+                    'transition': 'background-position ' + time + 's linear',
+                    'background-position': '0px ' + this.backOffset + "%"
+                });
 
-function wheelerScroll(direction){
-	console.log(currentAnchor);
-	var destination = direction + screens.findIndex(function(el){
-		return el.anchor == currentAnchor;
-	});
+                // Columns
+                this.columnOffset += delta;
+                this.$C.css({
+                    'transition': 'background-position ' + time + 's linear',
+                    'background-position': 'left ' + this.columnOffset + ', right ' + this.columnOffset + ', left ' + this.columnOffset + ', right ' + this.columnOffset
+                });
 
-	if(destination != -1 && destination != screens.length){
-		scrollToAnchor(screens[destination].anchor);
-	}
-}
+                //ScrollBar
+                $('.scroll-caret').css({
+                    'transition': 'top ' + time + 's linear',
+                    'top': caretOffset
+                });
+                $('.scroll-bar').css({
+                    'transition': 'background-position ' + time + 's linear',
+                    'background-position': '0px ' + caretOffset + "px"
+                });
 
-function scale (){
-	$('.scroll-bar').css('height', $('.wrapper')[0].clientHeight - $('.wheel').first().outerHeight()*2);
+                //Wheels
+                this.wheelAngle += delta / 2;
+                $('.rope-part').css({
+                    'transition': 'background-position ' + time + 's linear',
+                    'background-position': '0px ' + (caretOffset + 6) + "px"
+                });
 
-	var $C = $('.container'),
-	$sB = $('.scroll-bar'),
-	carH = $('.scroll-caret')[0].clientHeight,
-	bH = $('.scroll-bar')[0].clientHeight;
+                $('.wheel-spinner').css({
+                    'transition': 'transform ' + time + "s linear",
+                    'transform': 'rotate(' + this.wheelAngle + 'deg)'
+                });
 
-	sBlockHeight = (bH / screens.length);
+                setTimeout(function () {
+                    anchorHandler.inAction = false;
+                }, time * 1000);
+            }
+            return this;
+        },
+        scale: function () {
+            anchorHandler.$SB.css('height', $('.wrapper')[0].clientHeight - $('.wheel').first().outerHeight() * 2);
 
-	$('.scroll-caret').css('height', sBlockHeight); 
-	$('.arrow').css('top' , $('.scroll-caret').outerHeight()/2 - $('.arrow').outerHeight()/2);
+            var bH = anchorHandler.$SB[0].clientHeight,
+                $arrow = $('.arrow'),
+                $anchors = $('[class*=anchor-]');
 
-	$('[class*=anchor-]').each(function(index, el){
-		$(el).css({
-			"top": (sBlockHeight * (index+1) - (sBlockHeight/2)) - $('[class*=anchor-]').outerHeight()/2,
-			"left": $sB.outerWidth() + 15
-		})
-	})
+            anchorHandler.sBlockHeight = (bH / screens.length);
 
-	wheelerScroll(0);
-}
+            anchorHandler.$SC.css('height', anchorHandler.sBlockHeight);
+            $arrow.css('top', anchorHandler.$SC.outerHeight() / 2 - $arrow.outerHeight() / 2);
 
-$(document).ready(function(){
-	$(window).on('resize', _.debounce(scale,200))
+            $anchors.each(function (index, el) {
+                $(el).css({
+                    "top": (anchorHandler.sBlockHeight * (index + 1) - (anchorHandler.sBlockHeight / 2)) - $anchors.outerHeight() / 2,
+                    "left": anchorHandler.$SB.outerWidth() + 15
+                })
+            });
 
-	var $C = $('.container'),
-	$sB = $('.scroll-bar'),
-	carH = $('.scroll-caret')[0].clientHeight,
-	bH = $('.scroll-bar')[0].clientHeight;
+            anchorHandler.wheelerScroll(0);
+            return this;
+        }
+    };
 
-	for (var i = 0; i < screens.length; i++) {
-		$C.append('<div id="'+ screens[i].anchor +'" class="screen">' + screens[i].content + "</div>");
-		$sB.append('<div class="anchor-'+ screens[i].anchor +'" onclick="scrollToAnchor(\''+ screens[i].anchor +'\')">' + screens[i].anchor + "</div>")
-	};
-
-	scale();
-
-	var $body = $('body');
-	$body.on('click', '#wheel-top', function(){wheelerScroll(-1)})
-	$body.on('click', '#wheel-bot', function(){wheelerScroll(1)})
-})
+    anchorHandler.init(screens);
+});
